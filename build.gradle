@@ -1,0 +1,49 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.11.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com-encryptor'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	
+}
+
+bootJar {
+	mainClassName = 'com.encryptor.ComEncryptorApplication'
+	classifier = 'boot'
+	launchScript()
+}
+
+jar {
+    baseName = 'com-encryptor'
+    version = '1.0.0'
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.11.RELEASE'
+	
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.11.RELEASE'
+	
+	compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '2.1.0'
+
+	testCompile ("org.springframework.boot:spring-boot-starter-test:2.1.11.RELEASE"){
+         exclude module: 'mockito-core'
+    }
+}
+
